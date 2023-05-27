@@ -12,12 +12,26 @@ Book.init(
             primaryKey: true,
             autoIncrement: true
             },
+        cover: { // URL to image, or we could save images locally
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isUrl: true
+            }
+        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
                 len: [1, 200]
+            }
+        },
+        synopsis: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 1000]
             }
         },
         author: {
