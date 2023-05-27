@@ -12,7 +12,7 @@ Book.init(
             primaryKey: true,
             autoIncrement: true
             },
-        cover: { // URL to image, or we could save images locally
+        book_cover: { // URL to image, or we could save images locally
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
