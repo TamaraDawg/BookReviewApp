@@ -1,24 +1,26 @@
 const router = require('express').Router();
-const { Book } = require('../models');
-const { Genre } = require('../models');
-const withAuth = require('../utils/auth');
+const { Book, Genre } = require('../models/index.js'); 
 
-router.get('/', withAuth, async (req, res) => {
+const sequelize = require('../config/connection');
+
+const db = require('../models'); 
+
+router.get('/', async (req, res) => {
   try {
-    const data = await Genre.findAll({
-        attributes: { exclude: ['id'] },
-        include: [
-            {
-                model: Book,
-                attributes: ['name']
-            }
-        ]
+    const data = await Genre.findAll({ 
+      attributes: { exclude: ['id'] },
+      include: [
+        {
+          model: Book,
+          attributes: ['name'],
+        },
+      ],
     });
 
     const books = data.map((bookData) => bookData.get({ plain: true }));
 
     res.render('homepage', {
-        books,
+      books,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -35,3 +37,4 @@ router.get('/login', (req, res) => {
 });
 
 module.exports = router;
+

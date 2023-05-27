@@ -29,7 +29,7 @@ Book.init(
         },
         synopsis: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false, 
             validate: {
                 len: [1, 1000]
             }
