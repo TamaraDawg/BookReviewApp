@@ -28,10 +28,10 @@ Book.init(
             }
         },
         synopsis: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT, // will be a long paragraph
             allowNull: false,
             validate: {
-                len: [1, 1000]
+                len: [1, 50000]
             }
         },
         author: {
@@ -41,19 +41,19 @@ Book.init(
                 len: [1, 200]
             }
         },
+        release_date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            validate: {
+                isDate: true
+            }
+        },
         genre_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'genre',
                 key:'id'
-            }
-        },
-        release_date: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            validate: {
-                isDate: true
             }
         },
     },

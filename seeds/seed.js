@@ -10,17 +10,18 @@ const seedAll = async () => {
   await sequelize.sync({ force: true });
   console.log('\n----- BOOKS SYNCED -----\n');
 
-    await seedBooks();
-    console.log('\n----- BOOKS SEEDED -----\n');
-
     await seedGenres();
     console.log('\n----- GENRES SEEDED -----\n');
 
+    await seedUsers();
+    console.log('\n----- USERS SEEDED -----\n');
+
+    await seedBooks();
+    console.log('\n----- BOOKS SEEDED -----\n');
+    
     await seedReviews();
     console.log('\n----- REVIEWS SEEDED -----\n');
 
-    await seedUsers();
-    console.log('\n----- USERS SEEDED -----\n');
   process.exit(0);
 };
 
