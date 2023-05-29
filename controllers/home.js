@@ -7,19 +7,19 @@ const db = require('../models');
 
 router.get('/', async (req, res) => {
   try {
-    const data = await Genre.findAll({ 
+    const data = await Genre.findAll({
       attributes: { exclude: ['id'] },
       include: [
         {
           model: Book,
-          attributes: ['name'],
+          attributes: ['title'],
         },
       ],
     });
 
     const books = data.map((bookData) => bookData.get({ plain: true }));
 
-    res.render('homepage', {
+    res.render('layouts/main', {
       books,
     });
   } catch (err) {
@@ -27,6 +27,7 @@ router.get('/', async (req, res) => {
     console.log('error: ', err);
   }
 });
+
 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
