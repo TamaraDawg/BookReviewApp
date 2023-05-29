@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+
+:root {
+    --main:#57b179;  
+    --dark:#3f8359;  
+
+}
+
+.logincontainer {
+    background-color: var(--main);
+}
+
