@@ -16,16 +16,15 @@ const imageFilter = (req, file, cb) => {
     return cb(new Error("Please upload a JPG or PNG image."), false);
   }
 
-  // Accept the file
   cb(null, true);
 };
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, __dirname + "/../public/images");
+    cb(null, __dirname + "/../public/images"); // Save image to ./public/images
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-bezkoder-${file.originalname}`);
+    cb(null, `${Date.now()}-bezkoder-${file.originalname}`); 
   },
 });
 
