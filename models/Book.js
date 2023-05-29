@@ -12,7 +12,7 @@ Book.init(
             primaryKey: true,
             autoIncrement: true
             },
-        cover: { // URL to image, or we could save images locally
+        book_cover: { // URL to image, or we could save images locally
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -28,10 +28,10 @@ Book.init(
             }
         },
         synopsis: {
-            type: DataTypes.STRING,
-            allowNull: false, 
+            type: DataTypes.TEXT, // will be a long paragraph
+            allowNull: false,
             validate: {
-                len: [1, 1000]
+                len: [1, 50000]
             }
         },
         author: {
@@ -41,19 +41,19 @@ Book.init(
                 len: [1, 200]
             }
         },
+        release_date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            validate: {
+                isDate: true
+            }
+        },
         genre_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'genre',
                 key:'id'
-            }
-        },
-        release_date: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            validate: {
-                isDate: true
             }
         },
     },
