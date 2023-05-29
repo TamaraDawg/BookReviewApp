@@ -1,0 +1,14 @@
+{{!  just using generic var names/ tags that i will need to change }}
+{{! this is for home page list of books depending on genre area}}
+
+<div class = "genre">
+    <h2>{{genreTitle}}</h2>
+    <div class = "booksinlist"> 
+        {{#each books}}
+        <div class="book">
+            <img src="{{imageURL}}" alt = "{{title}}">
+            <p>{{title}}</p>
+        </div>
+        {{/each}}
+    </div>
+</div>

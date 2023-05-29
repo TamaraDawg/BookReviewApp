@@ -1,0 +1,25 @@
+{{!  just using generic var names/ tags that i will need to change }}
+{{! this is for the detail page when the book is clicked}}
+
+<div class = "bookpagecont">
+    <section class = "bookinfo">
+    <h2>{{title}}</h2>
+    {{! i might not include the date here:}}
+    <p id= "author">{{author}}, {{date}} </p>
+    <p>{{description}}</p>
+    {{! might not be a fancy starred icon rating, unless i have time to do more than MVP}}
+    <p id = "rating">{{rating}} </p>
+    <button id="btn">Add Review</button>
+    </section>
+
+    <section class = "reviewlistcont">
+        <h3> Reviews </h3>
+        {{#each reviews}}
+        <div class = "reviews">
+            <p>{{reviewer}}</p>
+            <p>{{review}}</p>
+
+        </div>
+        {{/each}}
+    </section>
+</div>
