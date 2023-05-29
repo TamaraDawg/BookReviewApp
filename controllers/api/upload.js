@@ -1,5 +1,5 @@
 const fs = require("fs");
-const db = require("../models");
+const db = require("../../models");
 const Image = db.images;
 
 const uploadFiles = async (req, res) => {
@@ -14,7 +14,7 @@ const uploadFiles = async (req, res) => {
       type: req.file.mimetype,
       name: req.file.originalname,
       data: fs.readFileSync(
-        __dirname + "/../public/images/" + req.file.filename
+        __dirname + "/../../public/images/" + req.file.filename
       ),
     }).then(() => {
       return res.send("File has been uploaded.");
@@ -25,6 +25,4 @@ const uploadFiles = async (req, res) => {
   }
 };
 
-module.exports = {
-  uploadFiles,
-};
+module.exports = uploadFiles;
