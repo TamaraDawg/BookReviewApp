@@ -36,13 +36,22 @@ Review.init(
                 key:'id'
             }
         },
+        book_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'book',
+                key:'id'
+            }
+        },        
     },
     {
         sequelize,
         timestamps: true,
         freezeTableName: true,
         underscored: true,
-        modelName: 'reviews',
+        modelName: 'review',
+
     }
 );
 

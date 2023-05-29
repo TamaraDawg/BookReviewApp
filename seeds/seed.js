@@ -9,7 +9,7 @@ const sequelize = require('../config/connection');
 const seedAll = async () => { //needs to be seeded in this order, pls dont rearrange
   await sequelize.sync({ force: true });
   console.log('\n----- BOOKS SYNCED -----\n');
-
+  
   await seedGenres();
   console.log('\n----- GENRES SEEDED -----\n');
 
