@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const multer = require("multer");
+const User = require('../../models/User.js');
 
 const { checkFileType, upload, storageEngine} = require('../../utils/imgValidation.js'); // import the multer configuration from utils
 
@@ -23,10 +24,10 @@ router.post("/", upload.single("image"), async (req, res) => {
 
     const userId = req.session.user_id; // gets the user id from the session
 
-    const image = '../../public/uploads' + file.filename; // sets the image path to the file name
+    const imagePath = '../../public/uploads/' + file.filename; // sets the image path to the file name
 
     await User.update( // updates the user table with the image path
-      { image: image,},
+      { image: imagePath},
       { where: { id: userId}}
     );
 
@@ -36,8 +37,5 @@ router.post("/", upload.single("image"), async (req, res) => {
     res.status(500).send("Please upload a valid image");
   }
 });
-
-
-
 
 module.exports = router;
