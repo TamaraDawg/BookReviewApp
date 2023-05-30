@@ -27,7 +27,7 @@ router.post("/", upload.single("image"), async (req, res) => {
 
     await User.update( // updates the user table with the image path
       { image: image,},
-      { where: { id: userId, },}
+      { where: { id: userId}}
     );
 
     res.status(200).send("Single file uploaded successfully");
