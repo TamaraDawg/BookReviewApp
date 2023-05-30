@@ -18,13 +18,19 @@ router.post("/", upload.single("image"), async (req, res) => {
     console.log(file);
 
     if (!file) { // makes sure there is a file
-      res.status(400).send("Please upload a file");
+      res.status(400).render(
+        'layouts/main', { msg: 'Please upload an image' }
+      );
     } 
 
-    res.status(200).send("Single file uploaded successfully");
+    res.status(200).render(
+      'layouts/main', { msg: 'Image Uploaded Successfully' }
+    );
 
   } catch (err) {
-    res.status(500).send("Please upload a valid image");
+    res.status(500).render(
+      'layouts/main', { msg: err }
+    );
   }
 });
 
