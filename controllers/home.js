@@ -16,8 +16,9 @@ router.get('/', async (req, res) => {
         },
       ],
     });
-
+    
     const books = data.map((bookData) => bookData.get({ plain: true }));
+    
 
     res.render('layouts/main', {
       books,

@@ -6,6 +6,7 @@ const home = require('./home.js');
 
 router.use('/', home);
 console.log('home hit');
+
 router.use('/api', apiRoutes);
 console.log('api hit');
 
