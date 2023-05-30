@@ -39,6 +39,10 @@ User.init(
         len: [8, 30],
       },
     },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     sequelize,
