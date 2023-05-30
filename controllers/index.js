@@ -1,9 +1,12 @@
 const router = require('express').Router();
 
-const apiRoutes = require('./api');
-const home = require('./home.js');
+const apiRoutes = require('./api'); // Default to index.js file inside api folder
+// const home = require('./home.js');
 
-router.use('/', home);
+// to go to home page
+// router.use('/', home);
+
+// to use the api routes
 router.use('/api', apiRoutes);
 
 module.exports = router;

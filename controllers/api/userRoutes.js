@@ -2,11 +2,17 @@ const router = require('express').Router();
 const { User } = require('../../models')
 
 // Create new user
+// Route to Sign up page
 router.post('/', async (req, res) => {
   try {
-    // Create a new user based on the data in the request body
-    const userData = await User.create(req.body); 
-
+    // Add a new user data to user table using User data model
+    const userData = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    }); 
+  
+    // Save the session so after the user sign up, the user doesn't need to log in again
     req.session.save(() => {
       // Assign the user's ID to the session's user_id property
       req.session.user_id = userData.id;
@@ -14,11 +20,12 @@ router.post('/', async (req, res) => {
       req.session.logged_in = true; 
       // Send a response with a status code of 200 and the user data as JSON
       res.status(200).json(userData); 
+
     });
   } catch (err) {
-    // If an error occurs, send a response with a status code of 400 
-    // and the error object as JSON
-    res.status(400).json(err); 
+      // If an error occurs, send a response with a status code of 400 
+      // and the error object as JSON
+      res.status(400).json(err); 
   }
 });
 
