@@ -27,6 +27,7 @@ const sequelize = require('../config/connection');
 //   process.exit(0);
 // };
 const seed = async () => {
+  await sequelize.sync({ force: true });
   await seedAll();
   console.log('\n----- BOOKS SEEDED -----\n');
 }
