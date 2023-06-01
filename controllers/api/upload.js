@@ -10,8 +10,6 @@ router.get('/', (req, res) => {
   res.send('Hello upload!');
 });
 
-
-
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     // upload image route
