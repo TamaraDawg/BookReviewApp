@@ -12,4 +12,6 @@ router.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+const keyRoutes = require('./key.js');
+router.use('/key', keyRoutes);
 module.exports = router;
