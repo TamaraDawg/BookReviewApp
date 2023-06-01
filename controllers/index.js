@@ -9,22 +9,29 @@ router.use('/api', apiRoutes);
 
 router.get('/', async (req, res) => {
   try {
-    const data = await Genre.findAll({
+
+    const genresWithBooks = await Genre.findAll({
       attributes: { exclude: ['id'] },
       include: [
         {
           model: Book,
-          attributes: ['title'],
+          attributes : ['title', 'author'],
         },
       ],
+      raw: true,
+      nest: true,
     });
-    
-    const books = data.map((bookData) => bookData.get({ plain: true }));
-    
 
-    res.render('layouts/main', {
-      books,
-    });
+    // const genresWithBooks = data.map((genreData) => {
+    //   const genre = genreData;
+    //   const books = genre.Books ? genre.Books.map((book) => book.title) : [];
+    //   return { ...genre, books };
+    // });
+  
+
+    res.render('layouts/main', { genresWithBooks });
+    console.log(genresWithBooks);
+
   } catch (err) {
     res.status(500).json(err);
     console.log('error: ', err);

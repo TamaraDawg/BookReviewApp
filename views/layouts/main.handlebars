@@ -16,6 +16,19 @@
       <button type="submit">Upload</button>
     </form>
   </div>
+
+  <div>
+    <h3>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h3>
+      {{#each genresWithBooks}}
+        <h2>{{genre_name}}</h2>
+        <ul>
+          {{#each books}}
+            <li>{{title}}</li>
+          {{/each}}
+        </ul>
+      {{/each}}
+  </div>
+
 </body>
 
 </html>
