@@ -1,15 +1,45 @@
-const { Book } = require('../models');
+const axios = require('axios');
+const Book = require('../models/Book.js');
 
-const bookData = [
-    {
-        book_cover: 'https://images-na.ssl-images-amazon.com/images/I/51UoqRAxwEL._SX331_BO1,204,203,200_.jpg',
-        title: 'Harry Potter',
-        synopsis: 'Harry Potter is a series of seven fantasy novels written by British author J. K. Rowling. The novels chronicle the lives of a young wizard, Harry Potter, and his friends Hermione Granger and Ron Weasley, all of whom are students at Hogwarts School of Witchcraft and Wizardry.',
-        author: 'J.K. Rowling',
-        release_date: 'June 26, 1997',
-        genre_id: 1,
-    },
-];
 
-const seedBooks = () => Book.bulkCreate(bookData);
+const seedBooks = async () => {
+    try {
+      const batchSize = 40;
+      const totalBooks = 100;
+      const iterations = Math.ceil(totalBooks / batchSize);
+      let booksData = [];
+  
+      for (let i = 0; i < iterations; i++) {
+        const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
+          params: {
+            q: 'top 100 books',
+            startIndex: i * batchSize,
+            maxResults: batchSize,
+          },
+        });
+  
+        const books = response.data.items;
+  
+        const batchData = books.map((book) => {
+          const book_cover = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '';
+          const title = book.volumeInfo.title;
+          const synopsis = book.volumeInfo.description ? book.volumeInfo.description : 'No description available.';
+          const author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown';
+          const release_date = book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate : 'Unknown';
+          return { book_cover, title, synopsis, author, release_date };
+        });
+  
+        booksData = booksData.concat(batchData);
+      }
+  
+      // Create new book records in the database
+      await Book.bulkCreate(booksData);
+  
+      console.log('Seed completed successfully.');
+    } catch (error) {
+      console.error('Seed failed:', error);
+    }
+};
+  
 module.exports = seedBooks;
+  
