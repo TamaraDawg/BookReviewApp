@@ -3,10 +3,96 @@
 :root {
     --main:#57b179;  
     --dark:#3f8359;  
+background-color: var(--main);
+}
 
+body {
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+h1 {
+    font-family:  sans-serif;
+    padding-top: 0.5rem;
+    text-align: center;
+    margin-top: 9rem;
+    top: 0;
+    color: white;
+    font-size: 4rem;
 }
 
 .logincontainer {
-    background-color: var(--main);
+    text-align: center;
+    margin-top: 10rem;
+    width: 800px;
+    max-width: 80%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px 2px var(--light);
 }
+
+.logincontainer h2 {
+    font-family: sans-serif;
+}
+input {
+    opacity: 80%;
+    text-align: center;
+    background-color: rgb(224, 224, 224);
+    border: 0  ;
+    padding: 0.5rem 5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    margin: 0 auto;
+}
+
+input:active {
+    border: orange;
+}
+.logint {
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-top: 0.1;
+    margin-bottom: 0;
+}
+
+#username {
+    
+    margin-top: 0;
+    margin-bottom: 0.2rem;
+}
+#password {
+    -webkit-text-security: disc; 
+}
+
+#subbtn {
+    
+    text-align: center;
+    display: block;
+    font-family: sans-serif;
+    color: white;
+    background-color: var(--main);
+    margin: 20px auto;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+#subbtn:hover {
+    opacity: 50%;
+}
+
+#subbtn:active{
+background-color: var(--dark);
+}
+
+footer {
+    text-align: center;
+}
+
 

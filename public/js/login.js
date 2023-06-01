@@ -4,8 +4,8 @@
 const loginFormHandler = async (event) => {
   event.preventDefault(); // to prevent the code from reloading
   // 
-  const email = document.querySelector('#email-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
+  const email = document.querySelector('#username').value.trim();
+  const password = document.querySelector('#password').value.trim();
 
   // If the user enter both email and password
   if (email && password) {
@@ -29,6 +29,8 @@ const loginFormHandler = async (event) => {
 // to listen to the log in form event
 document
   .querySelector('.login-form')
+
+  
   .addEventListener('submit', loginFormHandler);
 
   
