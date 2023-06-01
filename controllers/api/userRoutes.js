@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models')
 
-console.log('userRoutes hit');
-
 // Create new user
 // Route to Sign up page
 router.post('/', async (req, res) => {
