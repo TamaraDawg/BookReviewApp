@@ -1,5 +1,5 @@
 
-console.log("Hello from apitest.js"); // TODO: Delete later before submission
+console.log("Hello from fetch.js"); // TODO: Delete later before submission
 
 document.getElementById('book-search').addEventListener('submit', async (e) => {
   e.preventDefault();
