@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require('axios'); // fetch for back end
 const Book = require('../models/Book.js');
 
 
@@ -12,7 +12,7 @@ const seedBooks = async () => {
       for (let i = 0; i < iterations; i++) { // fetch request
         const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
           params: {
-            q: 'top 100 books',
+            q: 'top 100 books', // search query
             startIndex: i * batchSize, // sets the start index to the batch size
             maxResults: batchSize, // sets the max results to the batch size
           },
