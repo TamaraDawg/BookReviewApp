@@ -17,6 +17,7 @@ const loginFormHandler = async (event) => {
     });
     // If the response is ok 
     if (response.ok) {
+      console.log("You are now redirected to home page!!!") // TODO: To delete later
       // We will be directed toward homepage
       document.location.replace('/');
     } else {
@@ -26,11 +27,38 @@ const loginFormHandler = async (event) => {
   }
 };
 
-// to listen to the log in form event
+// Handle signup form event
+const signupFormHandler = async (event) => {
+  event.preventDefault();
+
+  const username = document.querySelector('#username-signup').value.trim();
+  const email = document.querySelector('#email-signup').value.trim();
+  const password = document.querySelector('#password-signup').value.trim();
+
+  if (username && email && password) {
+    console.log("Successfully sign up"); // TODO: Delete later before submission
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      body: JSON.stringify({ username, email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      // redirecting to home page
+      document.location.replace('/');
+    } else {
+      alert('Failed to sign up.');
+    }
+  }
+};
+
+// from html select element with login-form class
+// add event listener for login form
 document
   .querySelector('.login-form')
 
   
   .addEventListener('submit', loginFormHandler);
 
-  
+// from html select element with submit-form class
+// add event listener for submit form

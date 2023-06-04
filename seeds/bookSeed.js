@@ -1,7 +1,6 @@
 const axios = require('axios'); // makes fetch easier (i think)
 const Book = require('../models/Book.js');
 
-
 const seedBooks = async () => {
     try {
       const batchSize = 25; //batch per fetch, doesnt allow more than 40 fetch
