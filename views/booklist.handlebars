@@ -1,7 +1,7 @@
 {{!  just using generic var names/ tags that i will need to change }}
 {{! this is for home page list of books depending on genre area}}
 
-<div class = "genre">
+<!--<div class = "genre">
     <h2>{{genreTitle}}</h2>
     <div class = "booksinlist"> 
         {{#each books}}
@@ -11,4 +11,16 @@
         </div>
         {{/each}}
     </div>
-</div>
+</div> -->
+
+
+<body>
+    <div>
+        {{#each books}}
+
+        <div class="book">
+            <p>{{title}}</p>
+        </div>
+        {{/each}}
+    </div>
+</body>

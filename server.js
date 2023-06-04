@@ -40,19 +40,6 @@ app.use(session(sess));
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-const hbs = exphbs.create({});
-
-hbs.handlebars.registerHelper('eq', function (a, b) {
-  return a === b;
-});
-
-
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
-
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));

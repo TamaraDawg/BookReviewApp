@@ -15,29 +15,11 @@
 
 
 <body>
-  {{#each books}}
-  <p>aaaaa{{title}}</p>
-  {{/each}}
 
-  {{#if eq route 'login'}}
-  {{ login}}
-  {{else}}
-  <p>oh no.. placeholder</p>
-  {{/if}}
-  </body>
+{{{body}}}
+<footer>
+  <p>BookReads</p>
+</footer>
 
-  <div>
-      <h1>Image Upload</h1>
-    <form action="/api/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" name="image" accept="image/*" />
-      <button type="submit">Upload</button>
-    </form>
-  </div>
-
-  
 </body>
-
-  <footer>
-    <p>BookReads</p>
-  </footer>
 </html>

@@ -3,10 +3,10 @@
 
 <div class = "bookpagecont">
     <section class = "bookinfo">
-    <h2>{{title}}</h2>
+    <h2>{{book.title}}</h2>
     {{! i might not include the date here:}}
-    <p id= "author">{{author}}, {{date}} </p>
-    <p>{{description}}</p>
+    <p id= "author">{{book.author}}, {{book.release_date}} </p>
+    <p>{{book.synopsis}}</p>
     {{! might not be a fancy starred icon rating, unless i have time to do more than MVP}}
     <p id = "rating">{{rating}} </p>
     <button id="btn">Add Review</button>

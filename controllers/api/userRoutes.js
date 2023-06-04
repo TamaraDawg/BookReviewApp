@@ -3,7 +3,7 @@ const { User } = require('../../models')
 
 // Create new user
 // Route to Sign up page
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     // Add a new user data to user table using User data model
     const userData = await User.create({
@@ -33,15 +33,16 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const dbUserData = await User.findOne({
+      attributes: ['id', 'username', 'email', 'password', 'createdAt', 'updatedAt'], //need this or it will be upset about the NULL image in User model
       where: {
-        email: req.body.email,
+        username: req.body.username, //search by username. can use if statement if we want to use email or username
       },
     });
 
     if (!dbUserData) {
       res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+        .status(500) 
+        .render('login', { message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
@@ -49,18 +50,16 @@ router.post('/login', async (req, res) => {
 
     if (!validPassword) {
       res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
+      .status(500)
+      .render('login', { message: 'Incorrect email or password. Please try again!' });
+    return;
     }
 
     // Once the user successfully logs in, set up the sessions variable 'loggedIn'
     req.session.save(() => {
       req.session.loggedIn = true;
 
-      res
-        .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+      res.status(200).redirect('/'); //redirect to homepage if login is successful
     });
   } catch (err) {
     console.log(err);
