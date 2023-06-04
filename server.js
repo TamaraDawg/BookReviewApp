@@ -9,13 +9,18 @@ const sequelize = require('./config/connection');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+
+const hbs = exphbs.create({});
+
+hbs.handlebars.registerHelper('eq', function (a, b) {
+  return a === b;
+});
+
+
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-app.get('/login', (req, res) => {
-  res.render('main', { loginPage: true });
-});
 
 
 app.use(express.json());

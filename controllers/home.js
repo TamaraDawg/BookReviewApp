@@ -3,21 +3,23 @@ const { Book } = require('../models');
 const { Genre } = require('../models');
 const withAuth = require('../utils/auth');
 
+
 router.get('/', withAuth, async (req, res) => {
   try {
-    const data = await Genre.findAll({
-        attributes: { exclude: ['id'] },
-        include: [
-            {
-                model: Book,
-                attributes: ['name']
-            }
-        ]
-    });
 
+    const data = await Book.findAll({ // display by genre if i have time
+        limit: 5, 
+        attributes: { include: ['title'] }, 
+        // include: [
+        //     {
+        //         model: Book,
+        //         attributes: ['name']
+        //     }
+        // ]
+    });
     const books = data.map((bookData) => bookData.get({ plain: true }));
 
-    res.render('homepage', {
+    res.render('layouts/main', {
         books,
     });
   } catch (err) {
@@ -32,7 +34,7 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('login', { loginPage: true});
 });
 
 module.exports = router;

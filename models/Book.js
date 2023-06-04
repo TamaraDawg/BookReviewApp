@@ -22,7 +22,7 @@ Book.init(
         title: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
+            unique: false, //duplicate titles causing err's 
             validate: {
                 len: [1, 200]
             }
@@ -42,7 +42,7 @@ Book.init(
             }
         },
         release_date: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 isDate: true
@@ -50,7 +50,7 @@ Book.init(
         },
         genre_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: 'genre',
                 key:'id'

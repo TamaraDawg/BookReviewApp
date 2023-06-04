@@ -15,8 +15,12 @@
 
 
 <body>
-  {{#if loginPage}}
-  {{> login}}
+  {{#each books}}
+  <p>aaaaa{{title}}</p>
+  {{/each}}
+
+  {{#if eq route 'login'}}
+  {{ login}}
   {{else}}
   <p>oh no.. placeholder</p>
   {{/if}}

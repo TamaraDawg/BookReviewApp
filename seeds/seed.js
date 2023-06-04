@@ -19,8 +19,8 @@ const seedAll = async () => { //needs to be seeded in this order, pls dont rearr
   await seedUsers();
   console.log('\n----- USERS SEEDED -----\n');
 
-  await seedReviews();
-  console.log('\n----- REVIEWS SEEDED -----\n');
+  // await seedReviews();
+  // console.log('\n----- REVIEWS SEEDED -----\n'); //need to api genres then assign them to books
 
   process.exit(0);
 };
