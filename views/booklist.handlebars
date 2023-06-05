@@ -18,8 +18,9 @@
     <div>
         {{#each books}}
 
-        <div class="book">
-            <p>{{title}}</p>
+        <div id="book-{{@index}}">
+            <h3><a href="/book/{{id}}">{{title}}</a></h3>
+            <p>{{synopsis}}</p>
         </div>
         {{/each}}
     </div>
