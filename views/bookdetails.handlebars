@@ -1,26 +1,38 @@
 {{!  just using generic var names/ tags that i will need to change }}
 {{! this is for the detail page when the book is clicked}}
 
-<div class = "bookpagecont">
-    <section class = "bookinfo">
-    <h2>{{book.title}}</h2>
-    {{! i might not include the date here:}}
-    <img src="{{book_cover}}" alt="book cover"></img>
-    <p id= "author">{{book.author}}, {{book.release_date}} </p>
-    <p>{{book.synopsis}}</p>
-    {{! might not be a fancy starred icon rating, unless i have time to do more than MVP}}
-    <p id = "rating">{{rating}} </p>
-    <button id="btn">Add Review</button>
-    </section>
+<div class="bookpagecont">
+<section class="bookinfo">
+  <h2>{{title}}</h2>
+  <img src="{{book.book_cover}}" alt="book cover"></img>
+  <p id="author">{{author}}, {{release_date}}</p>
+  <p>{{synopsis}}</p>
+  <p id="rating">{{rating}}</p>
+  <button id="btn">Add Review</button>
+</section>
 
-    <section class = "reviewlistcont">
-        <h3> Reviews </h3>
-        {{#each reviews}}
-        <div class = "reviews">
-            <p>{{reviewer}}</p>
-            <p>{{review}}</p>
+<div class="reviews">
+  <h3>Reviews:</h3>
+  {{#each reviews}}
+    <p>{{this.review_text}} - by {{this.username}}</p>
+  {{/each}}
+</div>
 
-        </div>
-        {{/each}}
-    </section>
+
+  <div class="add-review">
+    <h3>Add a Review:</h3>
+    <form action="/review" method="POST">
+      <input type="hidden" name="book_id" value="{{book.id}}">
+      <textarea name="review_text" placeholder="Write your review"></textarea>
+      <label for="rating">Rating:</label>
+      <select name="review_rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button type="submit">Submit Review</button>
+    </form>
+  </div>
 </div>

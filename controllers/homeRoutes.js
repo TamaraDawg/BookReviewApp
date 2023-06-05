@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Book, Genre } = require('../models');
+const { Book, User, Review } = require('../models');
 const withAuth = require('../utils/auth'); //cant get this to work rn
 
 const { Op } = require('sequelize');
@@ -26,24 +26,49 @@ router.get('/', async (req, res) => {
 // GET one book
 router.get('/book/:id', async (req, res) => {
   try {
-    const dbBookData = await Book.findByPk(req.params.id);
+    const data = await Book.findByPk(req.params.id, {
+      include: [
+        {
+          model: Review,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+      ],
+    });
 
-    if (!dbBookData) {
+    if (!data) {
       res.status(404).json({ message: 'No book found with this id' });
       return;
     }
 
-    const book = dbBookData.get({ plain: true });
+    console.log(data, data.get({ plain: true }));
     
-    res.status(200).render('bookdetails', { 
-      book,
-    });
 
+    const books = [data].map((book) => {
+      const bookData = book.get({ plain: true });
+      bookData.reviews = bookData.reviews.map((review) => {
+        return {
+          ...review,
+          username: review.user.username // Add the 'username' property to the review object
+        };
+      });
+      console.log(bookData);
+      return bookData;
+    });
+    
+    console.log(books);
+    res.status(200).render('bookdetails', {
+      books,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
 
 
 router.get('/search', async (req, res) => {
@@ -57,10 +82,29 @@ router.get('/search', async (req, res) => {
         },
       },
       attributes: ['id', 'title', 'synopsis' , 'book_cover'],
-      limit: 10,
+      limit: 1,
+      include: [
+        {model: Review,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+      ],
     });
 
-    const books = data.map((book) => book.get({ plain: true }));
+    const books = data.map((book) => {
+      const bookData = book.get({ plain: true });
+      bookData.reviews = bookData.reviews.map((review) => {
+        return {
+          ...review,
+          username: review.user.username // Add the 'username' property to the review object
+        };
+      });
+      console.log(bookData);
+      return bookData;
+    });
 
     res.status(200).render('singlebook', {
       books,
@@ -70,6 +114,25 @@ router.get('/search', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.post('/review', async (req, res) => {
+  try {
+    const newReview = await Review.create({
+      ...req.body,
+      user_id: 1, //used for validation, change to req.session.user_id when login working
+      review_text: req.body.review_text,
+      book_id: req.body.book_id,
+      review_rating: req.body.review_rating,
+      });
+      
+      res.status(200).redirect('/book/' + req.body.book_id);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+});
+
+
 
 
 // Login route
