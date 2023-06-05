@@ -9,10 +9,11 @@ router.get('/', async (req, res) => {
   try {
     const data = await Book.findAll({
       limit: 10, 
-      attributes: ['id', 'title', 'synopsis'],
     });
-
+ 
     const books = data.map((book) => book.get({ plain: true }));
+
+    console.log(books);
 
     res.status(200).render('booklist', {
       books,

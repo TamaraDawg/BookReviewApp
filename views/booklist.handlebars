@@ -15,13 +15,19 @@
 
 
 <body>
-    <div>
-        {{#each books}}
-
-        <div id="book-{{@index}}">
-            <h3><a href="/book/{{id}}">{{title}}</a></h3>
-            <p>{{synopsis}}</p>
+<div class="container">
+  <div class="row">
+    {{#each books}}
+    <div class="col-md-6 col-lg-4">
+      <div class="card mb-4">
+        <img src="{{book_cover}}" class="card-img-top" alt="{{title}}">
+        <div class="card-body">
+          <h5 class="card-title"><a href="/book/{{id}}">{{title}}</a></h5>
         </div>
-        {{/each}}
+      </div>
     </div>
+    {{/each}}
+  </div>
+</div>
+
 </body>
