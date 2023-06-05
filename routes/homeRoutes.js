@@ -1,11 +1,8 @@
 const express = require('express');
+const withAuth = require('../utils/auth'); //cant get this to work rn
 const homeController = require('../controllers/homeControllers');
-const userController = require;
 
 const router = express.Router();
-
-const { Book, User, Review } = require('../models');
-const withAuth = require('../utils/auth'); //cant get this to work rn
 
 // GET all books for homepage
 router.route('/').get(withAuth, homeController.getAllBooks);
