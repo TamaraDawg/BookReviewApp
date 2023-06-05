@@ -8,12 +8,10 @@ const { Op } = require('sequelize');
 router.get('/', async (req, res) => {
   try {
     const data = await Book.findAll({
-      limit: 10, 
+      limit: 10, //currently only looks for 10 books (will be first 10 in db)
     });
  
-    const books = data.map((book) => book.get({ plain: true }));
-
-    console.log(books);
+    const books = data.map((book) => book.get({ plain: true })); //get plain object from sequelize object
 
     res.status(200).render('booklist', {
       books,
@@ -27,10 +25,10 @@ router.get('/', async (req, res) => {
 // GET one book
 router.get('/book/:id', async (req, res) => {
   try {
-    const dbBookData = await Book.findByPk(req.params.id, {
+    const dbBookData = await Book.findByPk(req.params.id, { //find book by id
       include: [
         {
-          model: Review,
+          model: Review, //finds reviews and usernames for each review
           include: [
             {
               model: User,
@@ -40,13 +38,13 @@ router.get('/book/:id', async (req, res) => {
       ],
     });
 
-    if (!dbBookData) {
-      res.status(404).json({ message: 'No book found with this id' });
+    if (!dbBookData) { 
+      res.status(404).json({ message: 'No book found with this id' }); 
       return;
     }
 
     const book = dbBookData.get({ plain: true });
-    console.log(book);
+
     res.status(200).render('bookdetails', {
       book,
     });
@@ -59,7 +57,7 @@ router.get('/book/:id', async (req, res) => {
 
 router.get('/search', async (req, res) => {
   const { search } = req.query;
-
+ //route takes search string, and looks for books with the same name
   try {
     const data = await Book.findAll({
       where: {
@@ -67,32 +65,11 @@ router.get('/search', async (req, res) => {
           [Op.like]: `%${search}%`, // Search for titles containing the search keyword
         },
       },
-      attributes: ['id', 'title', 'synopsis' , 'book_cover'],
-      limit: 1,
-      include: [
-        {model: Review,
-          include: [
-            {
-              model: User,
-            },
-          ],
-        },
-      ],
     });
 
-    const books = data.map((book) => {
-      const bookData = book.get({ plain: true });
-      bookData.reviews = bookData.reviews.map((review) => {
-        return {
-          ...review,
-          username: review.user.username // Add the 'username' property to the review object
-        };
-      });
-      console.log(bookData);
-      return bookData;
-    });
+    const books = data.map((book) => book.get({ plain: true })); //get plain object from sequelize object
 
-    res.status(200).render('singlebook', {
+    res.status(200).render('booklist', {
       books,
     });
   } catch (err) {
@@ -101,9 +78,10 @@ router.get('/search', async (req, res) => {
   }
 });
 
+
 router.post('/review', async (req, res) => {
   try {
-    const { book_id, review_text, review_rating } = req.body;
+    const { book_id, review_text, review_rating } = req.body; 
 
     if (!book_id) {
       throw new Error('Invalid book ID');
@@ -116,7 +94,7 @@ router.post('/review', async (req, res) => {
       review_rating,
     });
 
-    res.status(200).redirect('back');
+    res.status(200).redirect('back'); //goes back to prev page, in practice this will reload the page
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: err.message });

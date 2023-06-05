@@ -1,43 +1,20 @@
 <body>
-  {{#each books}}
-  <div class="book-details">
-    <h2>{{title}}</h2>
-    <img src="{{book_cover}}" alt="{{book.title}}"></img>
-    <p>synopsis: {{synopsis}}</p>
-    <p>Author: {{author}}</p>
+<div class="container">
+  <div class="row">
+    {{#each books}}
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img class="card-img-top" src="{{book_cover}}" alt="{{title}}">
+          <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{synopsis}}</p>
+            <a href="/book/{{id}}" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
   </div>
-
-  <div class="reviews">
-    <ul>
-
-      <h3>Reviews:</h3>
-      {{#each reviews}}
-      <li>
-        <p>{{this.review_text}} - by {{this.username}}</p>
-        <p>Rating: {{review_rating}}</p>
-      </li>
-      {{/each}}
-    </ul>
-  </div>
-  {{/each}}
-
-  <div class="add-review">
-    <h3>Add a Review:</h3>
-    <form action="/review" method="POST">
-      <input type="hidden" name="book_id" value="{{book.id}}">
-      <textarea name="review_text" placeholder="Write your review"></textarea>
-      <label for="rating">Rating:</label>
-      <select name="review_rating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-      <button type="submit">Submit Review</button>
-    </form>
-  </div>
-
+</div>
 
 
 </body>
