@@ -48,13 +48,9 @@ Book.init(
                 isDate: true
             }
         },
-        genre_id: {
-            type: DataTypes.INTEGER,
+        genre: {
+            type: DataTypes.STRING,
             allowNull: true,
-            references: {
-                model: 'genre',
-                key:'id'
-            }
         },
     },
     {

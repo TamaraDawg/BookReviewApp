@@ -67,6 +67,11 @@ router.get('/search', async (req, res) => {
       },
     });
 
+    if(!data) {
+      res.status(404).json({ message: 'No books found with this title' });
+      return;
+    }
+
     const books = data.map((book) => book.get({ plain: true })); //get plain object from sequelize object
 
     res.status(200).render('booklist', {

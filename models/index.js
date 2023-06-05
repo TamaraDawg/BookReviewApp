@@ -3,14 +3,6 @@ const Genre = require('./Genre');
 const User = require('./User');
 const Review = require('./Review');
 
-Book.belongsTo(Genre, {
-    foreignKey: 'genre_id',
-});
-
-Genre.hasMany(Book, {
-    foreignKey: 'genre_id',
-});
-
 User.hasMany(Review, {
     foreignKey: 'user_id',
 });
