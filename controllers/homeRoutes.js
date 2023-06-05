@@ -26,7 +26,18 @@ router.get('/', async (req, res) => {
 // GET one book
 router.get('/book/:id', async (req, res) => {
   try {
-    const dbBookData = await Book.findByPk(req.params.id);
+    const dbBookData = await Book.findByPk(req.params.id, {
+      include: [
+        {
+          model: Review,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+      ],
+    });
 
     if (!dbBookData) {
       res.status(404).json({ message: 'No book found with this id' });
@@ -34,11 +45,10 @@ router.get('/book/:id', async (req, res) => {
     }
 
     const book = dbBookData.get({ plain: true });
-    
-    res.status(200).render('bookdetails', { 
+    console.log(book);
+    res.status(200).render('bookdetails', {
       book,
     });
-
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -92,23 +102,25 @@ router.get('/search', async (req, res) => {
 
 router.post('/review', async (req, res) => {
   try {
-    const newReview = await Review.create({
-      ...req.body,
-      user_id: 1, //used for validation, change to req.session.user_id when login working
-      review_text: req.body.review_text,
-      book_id: req.body.book_id,
-      review_rating: req.body.review_rating,
-      });
-      
-      res.status(200).redirect('back');
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
+    const { book_id, review_text, review_rating } = req.body;
+
+    if (!book_id) {
+      throw new Error('Invalid book ID');
     }
+
+    const newReview = await Review.create({
+      user_id: 1, // Change to req.session.user_id when login is working
+      review_text,
+      book_id,
+      review_rating,
+    });
+
+    res.status(200).redirect('back');
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err.message });
+  }
 });
-
-
-
 
 // Login route
 router.get('/login', (req, res) => {

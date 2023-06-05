@@ -1,25 +1,30 @@
-
 <body>
-
-{{#each books}}
+  {{#each books}}
   <div class="book-details">
     <h2>{{title}}</h2>
-    <img src="{{book_cover}}" alt="book cover"></img>
+    <img src="{{book_cover}}" alt="{{book.title}}"></img>
     <p>synopsis: {{synopsis}}</p>
     <p>Author: {{author}}</p>
   </div>
 
   <div class="reviews">
-    <h3>Reviews:</h3>
-    {{#each reviews}}
-      <p>{{this.review_text}} - by {{this.username}}</p>
-    {{/each}}
+    <ul>
+
+      <h3>Reviews:</h3>
+      {{#each reviews}}
+      <li>
+        <p>{{this.review_text}} - by {{this.username}}</p>
+        <p>Rating: {{review_rating}}</p>
+      </li>
+      {{/each}}
+    </ul>
   </div>
+  {{/each}}
 
   <div class="add-review">
     <h3>Add a Review:</h3>
     <form action="/review" method="POST">
-      <input type="hidden" name="book_id" value="{{id}}">
+      <input type="hidden" name="book_id" value="{{book.id}}">
       <textarea name="review_text" placeholder="Write your review"></textarea>
       <label for="rating">Rating:</label>
       <select name="review_rating">
@@ -32,7 +37,7 @@
       <button type="submit">Submit Review</button>
     </form>
   </div>
-{{/each}}
 
- 
+
+
 </body>
