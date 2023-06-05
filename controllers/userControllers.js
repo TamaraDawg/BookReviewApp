@@ -16,15 +16,15 @@ exports.signUpUser = async (req, res) => {
       // Set the session's loggedIn property to true
       req.session.loggedIn = true;
       // Send a response with a status code of 200 and the user data as JSON
-      res.status(200).json({
-        status: 'success',
-        data: userData,
-      });
+      res.status(204);
     });
   } catch (err) {
     // If an error occurs, send a response with a status code of 400
     // and the error object as JSON
-    res.status(400).json(err);
+    res.status(400).json({
+      status: 'fail',
+      message: 'There was a problem in creating your account!',
+    });
   }
 };
 
@@ -32,7 +32,7 @@ exports.loginUser = async (req, res) => {
   try {
     // If user is already logged in, do nothing
     if (req.session.loggedIn) {
-      res.status(500).json({
+      res.status(404).json({
         status: 'error',
         message: 'User is already logged in!',
       });
@@ -54,7 +54,7 @@ exports.loginUser = async (req, res) => {
     });
 
     if (!dbUserData) {
-      res.status(500).json({
+      res.status(404).json({
         status: 'error',
         message: 'Incorrect email. Please try again!',
       });
@@ -64,7 +64,7 @@ exports.loginUser = async (req, res) => {
     const validPassword = await dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res.status(500).json({
+      res.status(404).json({
         status: 'error',
         message: 'Incorrect password. Please try again!',
       });
@@ -75,10 +75,7 @@ exports.loginUser = async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
 
-      res.status(200).json({
-        status: 'success',
-        data: dbUserData,
-      });
+      res.status(204);
     });
   } catch (err) {
     console.log(err);

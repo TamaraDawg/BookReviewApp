@@ -41,7 +41,9 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 // Development Logging
-app.use(morgan('dev'));
+if (process.env.NODE_ENV == 'development') {
+  app.use(morgan('dev'));
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
