@@ -26,49 +26,24 @@ router.get('/', async (req, res) => {
 // GET one book
 router.get('/book/:id', async (req, res) => {
   try {
-    const data = await Book.findByPk(req.params.id, {
-      include: [
-        {
-          model: Review,
-          include: [
-            {
-              model: User,
-            },
-          ],
-        },
-      ],
-    });
+    const dbBookData = await Book.findByPk(req.params.id);
 
-    if (!data) {
+    if (!dbBookData) {
       res.status(404).json({ message: 'No book found with this id' });
       return;
     }
 
-    console.log(data, data.get({ plain: true }));
+    const book = dbBookData.get({ plain: true });
     
+    res.status(200).render('bookdetails', { 
+      book,
+    });
 
-    const books = [data].map((book) => {
-      const bookData = book.get({ plain: true });
-      bookData.reviews = bookData.reviews.map((review) => {
-        return {
-          ...review,
-          username: review.user.username // Add the 'username' property to the review object
-        };
-      });
-      console.log(bookData);
-      return bookData;
-    });
-    
-    console.log(books);
-    res.status(200).render('bookdetails', {
-      books,
-    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
-
 
 
 router.get('/search', async (req, res) => {
@@ -125,7 +100,7 @@ router.post('/review', async (req, res) => {
       review_rating: req.body.review_rating,
       });
       
-      res.status(200).redirect('/book/' + req.body.book_id);
+      res.status(200).redirect('back');
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

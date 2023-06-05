@@ -5,34 +5,8 @@
 <section class="bookinfo">
   <h2>{{title}}</h2>
   <img src="{{book.book_cover}}" alt="book cover"></img>
-  <p id="author">{{author}}, {{release_date}}</p>
-  <p>{{synopsis}}</p>
-  <p id="rating">{{rating}}</p>
-  <button id="btn">Add Review</button>
+  <p id="author">{{book.author}}, {{book.release_date}}</p>
+  <p>{{book.synopsis}}</p>
+
 </section>
-
-<div class="reviews">
-  <h3>Reviews:</h3>
-  {{#each reviews}}
-    <p>{{this.review_text}} - by {{this.username}}</p>
-  {{/each}}
-</div>
-
-
-  <div class="add-review">
-    <h3>Add a Review:</h3>
-    <form action="/review" method="POST">
-      <input type="hidden" name="book_id" value="{{book.id}}">
-      <textarea name="review_text" placeholder="Write your review"></textarea>
-      <label for="rating">Rating:</label>
-      <select name="review_rating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-      <button type="submit">Submit Review</button>
-    </form>
-  </div>
 </div>
