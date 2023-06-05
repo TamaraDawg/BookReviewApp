@@ -1,4 +1,6 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
+
 const { Book, User, Review } = require('../models');
 const withAuth = require('../utils/auth'); //cant get this to work rn
 
@@ -8,9 +10,9 @@ const { Op } = require('sequelize');
 router.get('/', async (req, res) => {
   try {
     const data = await Book.findAll({
-      limit: 10, 
+      limit: 10,
     });
- 
+
     const books = data.map((book) => book.get({ plain: true }));
 
     console.log(books);
@@ -56,7 +58,6 @@ router.get('/book/:id', async (req, res) => {
   }
 });
 
-
 router.get('/search', async (req, res) => {
   const { search } = req.query;
 
@@ -67,10 +68,11 @@ router.get('/search', async (req, res) => {
           [Op.like]: `%${search}%`, // Search for titles containing the search keyword
         },
       },
-      attributes: ['id', 'title', 'synopsis' , 'book_cover'],
+      attributes: ['id', 'title', 'synopsis', 'book_cover'],
       limit: 1,
       include: [
-        {model: Review,
+        {
+          model: Review,
           include: [
             {
               model: User,
@@ -85,7 +87,7 @@ router.get('/search', async (req, res) => {
       bookData.reviews = bookData.reviews.map((review) => {
         return {
           ...review,
-          username: review.user.username // Add the 'username' property to the review object
+          username: review.user.username, // Add the 'username' property to the review object
         };
       });
       console.log(bookData);
@@ -125,7 +127,7 @@ router.post('/review', async (req, res) => {
 
 // Login route
 router.get('/login', (req, res) => {
-try {
+  try {
     res.status(200).render('login');
   } catch (err) {
     console.log(err);
@@ -134,14 +136,12 @@ try {
 }); //redirect to login page /api/users/login
 
 router.get('/signup', (req, res) => {
-try {
+  try {
     res.status(200).render('signup');
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 }); //redirect to signup page /api/users/signup
-
-
 
 module.exports = router;

@@ -1,13 +1,13 @@
-const router = require('express').Router();
-const { Book, Genre } = require('./models/index.js'); 
+const express = require('express');
+const morgan = require('morgan');
 
-const sequelize = require('./config/connection.js');
+const homeRoutes = require('./routes/homeRoutes');
 
-const homeRoutes = require('./routes/homeRoutes.js')
-const apiRoutes = require('./controllers/index.js');
+const app = express();
 
-router.use('/', homeRoutes)
-router.use('/api', apiRoutes);
+// Development Logging
+app.use(morgan('dev'));
+
+app.use('/', homeRoutes);
 
 module.exports = router;
-
