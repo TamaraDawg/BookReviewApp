@@ -1,13 +1,8 @@
 const express = require('express');
-const morgan = require('morgan');
+const router = express.Router();
 
 const homeRoutes = require('./routes/homeRoutes');
 
-const app = express();
-
-// Development Logging
-app.use(morgan('dev'));
-
-app.use('/', homeRoutes);
+router.use('/', homeRoutes);
 
 module.exports = router;
