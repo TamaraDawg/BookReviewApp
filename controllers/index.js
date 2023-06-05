@@ -1,13 +1,15 @@
 const router = require('express').Router();
-const { Book, Genre } = require('../models/index.js'); 
+const userRoutes = require('../routes/userRoutes');
+const upload = require('./upload.js');
+// Using users route
+router.use('/users', userRoutes);
 
-const sequelize = require('../config/connection.js');
 
-const homeRoutes = require('./homeRoutes.js')
-const apiRoutes = require('./api/index.js');
+// router.use('/upload', upload);
+// console.log('upload hit');
 
-router.use('/', homeRoutes)
-router.use('/api', apiRoutes);
+router.get('/', (req, res) => {
+    res.send('Hello World!');
+});
 
 module.exports = router;
-

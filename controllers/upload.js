@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const multer = require("multer");
-const User = require('../../models/User.js');
+const User = require('../models/User.js');
 
-const { checkFileType, upload, storageEngine} = require('../../utils/imgValidation.js'); // import the multer configuration from utils
+const { checkFileType, upload, storageEngine} = require('../utils/imgValidation.js'); // import the multer configuration from utils
 
 const path = require("path");
 
