@@ -1,11 +1,11 @@
 /* To handle log in form */
 
 // when the log in form event occur
-const loginFormHandler = async (event) => {
+const loginClickHandler = async (event) => {
   event.preventDefault(); // to prevent the code from reloading
-  //
-  const email = document.querySelector('#email-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
+
+  const email = document.querySelector('#email').value.trim();
+  const password = document.querySelector('#password').value.trim();
 
   // If the user enter both email and password
   if (email && password) {
@@ -24,42 +24,17 @@ const loginFormHandler = async (event) => {
       // Display an alert indicating that the login failed
       alert('Incorrect email or password. Please try again!');
     }
+  } else {
+    alert('Please enter your email and password!');
   }
 };
 
-// Handle signup form event
-const signupFormHandler = async (event) => {
+const createAccountHandler = (event) => {
   event.preventDefault();
-
-  const username = document.querySelector('#username-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
-
-  if (username && email && password) {
-    console.log('Successfully sign up'); // TODO: Delete later before submission
-    const response = await fetch('/api/users', {
-      method: 'POST',
-      body: JSON.stringify({ username, email, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-
-    if (response.ok) {
-      // redirecting to home page
-      document.location.replace('/');
-    } else {
-      alert('Failed to sign up.');
-    }
-  }
+  document.location.replace('/signup');
 };
 
-// from html select element with login-form class
-// add event listener for login form
+document.querySelector('#login').addEventListener('click', loginClickHandler);
 document
-  .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
-
-// from html select element with submit-form class
-// add event listener for submit form
-document
-  .querySelector('.signup-form')
-  .addEventListener('submit', signupFormHandler);
+  .querySelector('#create-acc')
+  .addEventListener('click', createAccountHandler);

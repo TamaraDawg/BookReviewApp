@@ -37,6 +37,7 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
+        isAlphanumeric: true,
         len: [8, 30],
       },
     },

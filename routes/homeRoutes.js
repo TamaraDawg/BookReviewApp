@@ -13,6 +13,9 @@ router.route('/book/:id').get(withAuth, homeController.getOneBook);
 // Login route
 router.route('/login').get(homeController.showLoginPage);
 
+// Signup route
+router.route('/signup').get(homeController.showSignupPage);
+
 module.exports = router;
 
 // const { Op } = require('sequelize');

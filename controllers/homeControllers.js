@@ -60,3 +60,12 @@ exports.showLoginPage = (req, res) => {
     res.status(500).json(err);
   }
 };
+
+exports.showSignupPage = (req, res) => {
+  try {
+    res.status(200).render('signup');
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};

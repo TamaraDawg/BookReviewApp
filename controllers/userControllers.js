@@ -9,14 +9,9 @@ exports.signUpUser = async (req, res) => {
       password: req.body.password,
     });
 
-    // Save the session so after the user sign up, the user doesn't need to log in again
-    req.session.save(() => {
-      // Assign the user's ID to the session's user_id property
-      req.session.user_id = userData.id;
-      // Set the session's loggedIn property to true
-      req.session.loggedIn = true;
-      // Send a response with a status code of 200 and the user data as JSON
-      res.status(204);
+    res.status(200).json({
+      status: 'success',
+      message: 'User account has been successfully created.',
     });
   } catch (err) {
     // If an error occurs, send a response with a status code of 400
@@ -73,9 +68,12 @@ exports.loginUser = async (req, res) => {
 
     // Once the user successfully logs in, set up the sessions variable 'loggedIn'
     req.session.save(() => {
+      // req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
-
-      res.status(204);
+      res.status(200).json({
+        status: 'success',
+        message: 'User has been successfully logged in.',
+      });
     });
   } catch (err) {
     console.log(err);

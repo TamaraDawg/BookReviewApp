@@ -1,41 +1,29 @@
+<header>
+  <h1>BetterReads <i class='fas fa-book-open'></i></h1>
+</header>
 
-<body>
+<div class='login-container'>
+  <h2>Join Us</h2>
 
-    <h1>User Sign Up</h1>
+  <p class='login-title'>Username</p>
+  <input type='text' id='username' placeholder='Your username...' required />
 
-    <form action="/api/users/signup" method="POST">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <div>
-        <label for="password">Re-enter Password:</label>
-        <input type="password" id="passwordCopy" name="passwordCopy" required>
-    </div>
-    <div>
-        <button id="submit" type="submit">Sign Up</button>
-    </div>
-    </form>
-{{! just using as validation}}
-    <script> 
-        const password = document.getElementById('password');
-        const passwordCopy = document.getElementById('passwordCopy');
+  <p class='login-title'>Email</p>
+  <input type='text' id='email' placeholder='Your email...' required />
 
-        const btn = document.getElementById('submit');
+  <p class='login-title'>Password</p>
+  <input type='text' id='password' placeholder='Your password...' required />
 
-        btn.addEventListener('click', (e) => {
-            if (password.value !== passwordCopy.value) {
-                e.preventDefault();
-                alert('Passwords do not match');
-            } return true;
-        });
-    </script>
-</body>
+  <p class='login-title'>Confirm password</p>
+  <input
+    type='password'
+    id='passwordConfirm'
+    placeholder='Confirm your password...'
+    required
+  />
+
+  <div class='button-container'>
+    <button class='subbtn' id='signup'>Sign Up</button>
+  </div>
+</div>
+<script src='/js/signup.js'></script>
