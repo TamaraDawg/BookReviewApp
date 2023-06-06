@@ -1,4 +1,4 @@
-const seedGenres = require('./genreSeed');
+// const seedGenres = require('./genreSeed');
 const seedBooks = require('./bookSeed');
 const seedUsers = require('./userSeed');
 const seedReviews = require('./reviewSeed');
@@ -10,8 +10,8 @@ const seedAll = async () => { //needs to be seeded in this order, pls dont rearr
   await sequelize.sync({ force: true });
   console.log('\n----- BOOKS SYNCED -----\n');
   
-  await seedGenres();
-  console.log('\n----- GENRES SEEDED -----\n');
+  // await seedGenres();
+  // console.log('\n----- GENRES SEEDED -----\n');
 
   await seedBooks();
   console.log('\n----- BOOKS SEEDED -----\n');
@@ -19,8 +19,8 @@ const seedAll = async () => { //needs to be seeded in this order, pls dont rearr
   await seedUsers();
   console.log('\n----- USERS SEEDED -----\n');
 
-  await seedReviews();
-  console.log('\n----- REVIEWS SEEDED -----\n');
+  // await seedReviews();
+  // console.log('\n----- REVIEWS SEEDED -----\n'); //need to api genres then assign them to books
 
   process.exit(0);
 };

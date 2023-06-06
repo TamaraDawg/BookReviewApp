@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+
+:root {
+  --main: #57b179;
+  --dark: #3f8359;
+  --grey: #494949;
+  background-color: var(--main);
+  color: var(--grey);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+h1 {
+  font-family: sans-serif;
+  padding-top: 0.5rem;
+  text-align: center;
+  margin-top: 9rem;
+  top: 0;
+  color: white;
+  font-size: 4rem;
+}
+
+.login-container {
+  text-align: center;
+  margin-top: 10rem;
+  width: 35rem;
+  max-width: 80%;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px 2px var(--light);
+}
+
+.login-container h2 {
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+
+input {
+  opacity: 80%;
+  text-align: center;
+  background-color: rgb(224, 224, 224);
+  border: 0;
+  padding: 1rem 5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+input:active {
+  border: orange;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  margin: 1em 8em;
+}
+
+.subbtn {
+  text-align: center;
+  display: block;
+  font-family: sans-serif;
+  color: white;
+  background-color: var(--main);
+  margin: 20px auto;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.subbtn:hover {
+  opacity: 50%;
+}
+
+.subbtn:active {
+  background-color: var(--dark);
+}
+
+.create-account {
+  background-color: #285439;
+}
+
+.login-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+#username {
+  margin-top: 0;
+  margin-bottom: 0.2rem;
+}
+#password {
+  -webkit-text-security: disc;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.topnav {
+  background-color: var(--main);
+  overflow: hidden;
+}
+
+.topnav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.topnav a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  text-decoration: none;
+}
+
+footer {
+  background-color: var(--main);
+  padding: 20px;
+  text-align: center;
+  color: white;
+}

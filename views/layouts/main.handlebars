@@ -1,21 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>BetterReads</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Registry</title>
-  <link rel="stylesheet" href="/css/jass.css">
-</head>
+    <link rel='stylesheet' href='/css/style.css' />
+    <link
+      rel='stylesheet'
+      href='https://use.fontawesome.com/releases/v5.5.0/css/all.css'
+      integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU'
+      crossorigin='anonymous'
+    />
+  </head>
 
-<body>
-  <div>
-      <h1>Image Upload</h1>
-    <form action="/api/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" name="image" accept="image/*" />
-      <button type="submit">Upload</button>
-    </form>
-  </div>
-</body>
+  <body>
+    {{#if loggedIn}}
+    <div class='container'>
+      <nav class='d-flex align-items-center mt-3'>
+        <form action='/' method='get'>
+          <button class='btn btn-primary' type='submit'>Home</button>
+        </form>
+        <form action='/search' method='GET' class='form-inline ml-2'>
+          <input
+            class='form-control mr-sm-2'
+            type='text'
+            name='search'
+            placeholder='Search by title'
+          />
+          <button class='btn btn-primary' type='submit'>Search</button>
+        </form>
+        <button id='logout' class='btn-no-style'>Logout</button>
+      </nav>
+    {{/if}}
+
+    </div>
+    {{{body}}}
+
+    <footer>
+      <p>BookReads</p>
+    </footer>
+    {{#if loggedIn}}
+      <script src='/js/logout.js'></script>
+    {{/if}}
+  </body>
 
 </html>

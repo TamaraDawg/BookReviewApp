@@ -1,12 +1,12 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
+const morgan = require('morgan');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const routes = require('./controllers');
+const routes = require('./index');
 
 const exphbs = require('express-handlebars');
-
 
 const sequelize = require('./config/connection');
 
@@ -40,6 +40,11 @@ app.use(session(sess));
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+// Development Logging
+if (process.env.NODE_ENV == 'development') {
+  app.use(morgan('dev'));
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -47,5 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening on http://localhost:3001/'));
+  app.listen(PORT, () =>
+    console.log('Now listening on http://localhost:3001/')
+  );
 });
