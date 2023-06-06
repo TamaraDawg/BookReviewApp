@@ -5,10 +5,10 @@ const logout = async () => {
   });
 
   if (response.ok) {
-    alert('You have successfully logged out.');
+    // alert('You have successfully logged out.');
     document.location.replace('/');
   } else {
-    alert('Failed to log out.');
+    // alert('Failed to log out.');
   }
 };
 
