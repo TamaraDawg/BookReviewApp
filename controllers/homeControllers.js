@@ -1,4 +1,4 @@
-const{ Book, Review, User } = require('../models');
+const { Book, Review, User } = require('../models');
 const { Op } = require('sequelize');
 
 exports.getAllBooks = async (req, res) => {
@@ -51,6 +51,7 @@ exports.getOneBook = async (req, res) => {
       book,
       loggedIn: req.session.loggedIn,
     });
+    // res.status(200).json({ book, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -75,7 +76,6 @@ exports.showSignupPage = (req, res) => {
   }
 };
 
-
 exports.searchBooks = async (req, res) => {
   const { search } = req.query;
   //route takes search string, and looks for books with the same name
@@ -88,7 +88,7 @@ exports.searchBooks = async (req, res) => {
       },
     });
 
-    if(!data) {
+    if (!data) {
       res.status(404).json({ message: 'No books found with this title' });
       return;
     }
