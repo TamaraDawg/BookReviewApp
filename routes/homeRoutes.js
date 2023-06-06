@@ -16,6 +16,10 @@ router.route('/login').get(homeController.showLoginPage);
 // Signup route
 router.route('/signup').get(homeController.showSignupPage);
 
+router.route('/search').get(homeController.searchBooks);
+
+router.route('/review').post(homeController.postReview);
+
 module.exports = router;
 
 // const { Op } = require('sequelize');
