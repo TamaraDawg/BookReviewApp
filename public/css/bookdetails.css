@@ -13,9 +13,9 @@ main {
   padding-top: 30px;
 }
 
-.book-details-cover {
+/* .book-details-cover {
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .book-details-cover img {
   width: 100%;
