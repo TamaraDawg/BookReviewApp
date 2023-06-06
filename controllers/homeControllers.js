@@ -93,12 +93,8 @@ exports.searchBooks = async (req, res) => {
 
     const books = data.map((book) => book.get({ plain: true })); //get plain object from sequelize object
 
-    // res.status(200).render('booklist', {
-    //   books,
-    // });
-    res.status(200).json({
-      status: 'success',
-      books,
+    res.status(200).render('booklist', {
+     books,
       loggedIn: req.session.loggedIn, //didnt think you need this, but breaks css if removed
     });
   } catch (err) {
