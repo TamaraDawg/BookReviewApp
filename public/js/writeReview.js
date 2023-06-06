@@ -10,17 +10,22 @@ showReviewForm = (event) => {
 submitReview = async (event) => {
   event.preventDefault();
 
-  const reviewText = querySelector('#review-text').value.trim();
+  const reviewText = document.querySelector('#review-text').value.trim();
+  const bookID = document.querySelector('#book_id').textContent;
 
   if (reviewText) {
     const response = await fetch('/api/reviews/', {
       method: 'POST',
-      body: JSON.stringify({ reviewText }),
+      body: JSON.stringify({
+        book_id: bookID,
+        review_text: reviewText,
+      }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
       alert('Thank you for submitting a review.');
+      location.reload();
     } else {
       alert('There was an error in sumbitting your review. Please try again!');
     }

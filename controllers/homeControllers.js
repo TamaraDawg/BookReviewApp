@@ -104,23 +104,27 @@ exports.searchBooks = async (req, res) => {
 
 exports.postReview = async (req, res) => {
   try {
-    const { book_id, review_text, review_rating, user_id } = req.body;
+    const { book_id, review_text } = req.body;
 
     if (!book_id) {
       throw new Error('Invalid book ID');
     }
 
-
     const newReview = await Review.create({
       user_id: req.session.user.id,
       review_text,
       book_id,
-      review_rating,
     });
 
-    res.status(200).redirect('back');
+    res.status(200).json({
+      status: 'success',
+      review: newReview,
+    });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({
+      status: 'fail',
+      message: err.message,
+    });
   }
 };

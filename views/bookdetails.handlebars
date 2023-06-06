@@ -5,6 +5,7 @@
     <img src='{{book.book_cover}}' alt='{{book.title}}' />
   </section>
   <div class='book-details-body'>
+    <p id='book_id'>{{book.id}}</p>
     <p class='book-details-title'>{{book.title}}</p>
     <p class='book-details-author'>{{book.author}}</p>
     <p class='book-details-sypnosis'>
@@ -25,7 +26,6 @@
     <div class='review-list'>
       {{#each book.reviews}}
         <div class='review-item'>
-          <p class='review-rating'>Review Rating: {{review_rating}}</p>
           <p class='review-content'>
             {{review_text}}
           </p>

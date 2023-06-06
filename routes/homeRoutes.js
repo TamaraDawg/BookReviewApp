@@ -4,20 +4,18 @@ const homeController = require('../controllers/homeControllers');
 
 const router = express.Router();
 
+router.route('/login').get(homeController.showLoginPage);
+router.route('/signup').get(homeController.showSignupPage);
+
 // GET all books for homepage
 router.route('/').get(withAuth, homeController.getAllBooks);
 
 // GET one book
-router.route('/book/:id').get(withAuth, homeController.getOneBook);
+router.route('/api/books/:id').get(withAuth, homeController.getOneBook);
 
-// Login route
-router.route('/login').get(homeController.showLoginPage);
-
-// Signup route
-router.route('/signup').get(homeController.showSignupPage);
+// Create review
+router.route('/api/reviews').post(homeController.postReview);
 
 router.route('/search').get(homeController.searchBooks);
-
-router.route('/review').post(homeController.postReview);
 
 module.exports = router;
