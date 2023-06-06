@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 exports.getAllBooks = async (req, res) => {
   try {
     const data = await Book.findAll({
-      limit: 12,
+      // limit: 12,
     });
 
     const books = data.map((book) => book.get({ plain: true }));
@@ -93,7 +93,11 @@ exports.searchBooks = async (req, res) => {
 
     const books = data.map((book) => book.get({ plain: true })); //get plain object from sequelize object
 
-    res.status(200).render('booklist', {
+    // res.status(200).render('booklist', {
+    //   books,
+    // });
+    res.status(200).json({
+      status: 'success',
       books,
     });
   } catch (err) {
