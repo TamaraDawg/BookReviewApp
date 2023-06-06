@@ -95,6 +95,7 @@ exports.searchBooks = async (req, res) => {
 
     res.status(200).render('booklist', {
       books,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     console.log(err);
