@@ -25,22 +25,22 @@
         <a href='/'>
           <header>BetterReads <i class='fas fa-book-open'></i></header>
         </a>
-        <div class='search-container'>
-          <input type='text' placeholder='Search...' />
+        <form action="/search" method="GET" class='search-container'>
+          <input name="search" type='text' placeholder='Search...' />
           <button type='submit'><i class='fas fa-search'></i></button>
-        </div>
+        </form>
 
         <ul>
           <!-- added links to allow a jump to sections of the page for easier navigation (not currently in action)-->
           <li>
             <a href='/'><i class='fas fa-home'></i> </a>
           </li>
-          <li>
+          {{! <li>
             <a href='#GENRE'> <i class='fas fa-theater-masks'> </i></a>
           </li>
           <li>
             <a href='#PROFILE'><i class='fas fa-user'></i> </a>
-          </li>
+          </li> }}
           <li>
             <button id='logout'>Log Out</button>
           </li>

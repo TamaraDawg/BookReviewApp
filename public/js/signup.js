@@ -23,6 +23,7 @@ const signupHandler = async (event) => {
     });
 
     if (response.ok) {
+      alert('Your account has been created. Please login!');
       // redirecting to home page
       document.location.replace('/login');
     } else {
