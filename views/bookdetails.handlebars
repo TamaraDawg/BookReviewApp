@@ -12,13 +12,15 @@
       {{book.synopsis}}
     </p>
     <button id='write-review' class='write-review-btn'>Write Review</button>
-    <div id='review-box' class='review-box'>
+    <form action="/review" method="POST" id='review-box' class='review-box'>
+      <input type="hidden" name="book_id" value="{{book.id}}">
       <textarea
+        name='review_text'
         id='review-text'
         placeholder='Please write your review here...'
       ></textarea>
       <button id='submit-btn'>Submit</button>
-    </div>
+    </form>
   </div>
 
   <section class='reviews-section'>
@@ -29,7 +31,7 @@
           <p class='review-content'>
             {{review_text}}
           </p>
-          <p class='review-username'>User: {{user_id}}</p>
+          <p class='review-username'>User: {{user.username}}</p>
         </div>
       {{/each}}
     </div>
