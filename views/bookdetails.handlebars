@@ -1,40 +1,41 @@
 {{!  just using generic var names/ tags that i will need to change }}
 {{! this is for the detail page when the book is clicked}}
-
-<div class="bookpagecont">
- <div>
-  <div class="book-details">
-    <h2>{{book.title}}</h2>
-    <img src="{{book.book_cover}}" alt="{{book.title}}"></img>
-    <p>synopsis: {{book.synopsis}}</p>
-    <p>Author: {{book.author}}</p>
-  </div>
-  <h4>Reviews</h4>
-  <ul>
-    {{#each book.reviews}}
-      <li>
-        <p> {{review_text}} - by: {{user.username}}</p>
-        <p>Rating: {{review_rating}}</p>
-      </li>
-    {{/each}}
-  </ul>
-
-    <div class="add-review">
-    <h3>Add a Review:</h3>
-    <form action="/review" method="POST">
-      <input type="hidden" name="book_id" value="{{book.id}}">
-      <textarea name="review_text" placeholder="Write your review"></textarea>
-      <label for="rating">Rating:</label>
-      <select name="review_rating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-      <button type="submit">Submit Review</button>
+<main>
+  <section class='book-details-cover'>
+    <img src='{{book.book_cover}}' alt='{{book.title}}' />
+  </section>
+  <div class='book-details-body'>
+    <p id='book_id'>{{book.id}}</p>
+    <p class='book-details-title'>{{book.title}}</p>
+    <p class='book-details-author'>{{book.author}}</p>
+    <p class='book-details-sypnosis'>
+      {{book.synopsis}}
+    </p>
+    <button id='write-review' class='write-review-btn'>Write Review</button>
+    <form action='/review' method='POST' id='review-box' class='review-box'>
+      <input type='hidden' name='book_id' value='{{book.id}}' />
+      <textarea
+        name='review_text'
+        id='review-text'
+        placeholder='Please write your review here...'
+      ></textarea>
+      <button id='submit-btn'>Submit</button>
     </form>
   </div>
-</div>
 
-</div>
+  <section class='reviews-section'>
+    <p class='review-section-title'>Reviews</p>
+    <div class='review-list'>
+      {{#each book.reviews}}
+        <div class='review-item'>
+          <p class='review-content'>
+            {{review_text}}
+          </p>
+          <p class='review-username'>{{user.username}}</p>
+        </div>
+      {{/each}}
+    </div>
+  </section>
+</main>
+
+<script src='/js/writeReview.js'></script>

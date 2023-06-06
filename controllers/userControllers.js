@@ -69,6 +69,8 @@ exports.loginUser = async (req, res) => {
     // Once the user successfully logs in, set up the sessions variable 'loggedIn'
     req.session.save(() => {
       // req.session.user_id = dbUserData.id;
+      req.session.user = {};
+      req.session.user.id = dbUserData.id; //assigns a user id to the session
       req.session.loggedIn = true;
       res.status(200).json({
         status: 'success',

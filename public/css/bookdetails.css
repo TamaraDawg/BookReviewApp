@@ -1,0 +1,150 @@
+body {
+  background-color: #f3f9f6;
+  font-family: Arial, sans-serif;
+}
+
+main {
+  margin: 0 auto;
+  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 50px;
+  row-gap: 80px;
+  padding-top: 30px;
+}
+
+/* .book-details-cover {
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+} */
+
+.book-details-cover img {
+  width: 100%;
+}
+
+.book-details-body {
+  grid-column: 2 / 4;
+  /* box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); */
+  padding: 20px 30px;
+  border: 2px solid white;
+  border-radius: 10px;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+#book_id {
+  display: none;
+}
+
+.book-details-title {
+  color: var(--main);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.book-details-author {
+  color: #747474;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.book-details-sypnosis {
+  color: #494949;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.write-review-btn {
+  background-color: var(--dark);
+  border: none;
+  padding: 8px 13px;
+  border-radius: 3px;
+  color: whitesmoke;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.write-review-btn:hover {
+  opacity: 50%;
+}
+
+.review-box {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+#review-text {
+  padding: 10px;
+  height: 100px;
+  margin-bottom: 3px;
+  vertical-align: top;
+}
+
+#submit-btn {
+  background-color: var(--dark);
+  color: whitesmoke;
+  border-radius: 3px;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+#submit-btn:hover {
+  opacity: 50%;
+}
+
+.reviews-section {
+  grid-column: 1 / -1;
+  margin: 0 auto;
+  /* box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); */
+  background-color: none;
+  padding: 10px;
+  width: 100%;
+}
+
+.review-section-title {
+  color: var(--main);
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.review-item {
+  margin: 0 auto;
+  margin-bottom: 15px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  width: 70%;
+}
+
+.review-item:last-child {
+  margin-bottom: 0;
+}
+
+.review-rating {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: var(--main);
+}
+
+.review-content {
+  font-size: 16px;
+  margin-bottom: 3px;
+  color: #494949;
+}
+
+.review-username {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+}

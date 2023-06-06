@@ -17,7 +17,6 @@ const loginClickHandler = async (event) => {
     });
     // If the response is ok
     if (response.ok) {
-      alert('You are now redirected to home page!!!'); // TODO: To delete later
       // We will be directed toward homepage
       document.location.replace('/');
     } else {

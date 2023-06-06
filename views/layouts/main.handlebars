@@ -4,7 +4,13 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>BetterReads</title>
 
-    <link rel='stylesheet' href='/css/style.css' />
+    {{#if loggedIn}}
+      <link rel='stylesheet' href='/css/booklist.css' />
+      <link rel='stylesheet' href='/css/bookdetails.css' />
+    {{else}}
+      <link rel='stylesheet' href='/css/style.css' />
+    {{/if}}
+
     <link
       rel='stylesheet'
       href='https://use.fontawesome.com/releases/v5.5.0/css/all.css'
@@ -15,29 +21,37 @@
 
   <body>
     {{#if loggedIn}}
-    <div class='container'>
-      <nav class='d-flex align-items-center mt-3'>
-        <form action='/' method='get'>
-          <button class='btn btn-primary' type='submit'>Home</button>
-        </form>
-        <form action='/search' method='GET' class='form-inline ml-2'>
-          <input
-            class='form-control mr-sm-2'
-            type='text'
-            name='search'
-            placeholder='Search by title'
-          />
-          <button class='btn btn-primary' type='submit'>Search</button>
-        </form>
-        <button id='logout' class='btn-no-style'>Logout</button>
+      <nav class='topnav'>
+        <a href='/'>
+          <header>BetterReads <i class='fas fa-book-open'></i></header>
+        </a>
+        <div class='search-container'>
+          <input type='text' placeholder='Search...' />
+          <button type='submit'><i class='fas fa-search'></i></button>
+        </div>
+
+        <ul>
+          <!-- added links to allow a jump to sections of the page for easier navigation (not currently in action)-->
+          <li>
+            <a href='/'><i class='fas fa-home'></i> </a>
+          </li>
+          <li>
+            <a href='#GENRE'> <i class='fas fa-theater-masks'> </i></a>
+          </li>
+          <li>
+            <a href='#PROFILE'><i class='fas fa-user'></i> </a>
+          </li>
+          <li>
+            <button id='logout'>Log Out</button>
+          </li>
+        </ul>
       </nav>
     {{/if}}
 
-    </div>
     {{{body}}}
 
     <footer>
-      <p>BookReads</p>
+      <p>BetterReads</p>
     </footer>
     {{#if loggedIn}}
       <script src='/js/logout.js'></script>

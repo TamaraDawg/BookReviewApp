@@ -1,20 +1,22 @@
-const{ Book, Review, User } = require('../models');
+const { Book, Review, User } = require('../models');
 const { Op } = require('sequelize');
 
 exports.getAllBooks = async (req, res) => {
   try {
     const data = await Book.findAll({
-      limit: 10,
+      limit: 12,
     });
 
     const books = data.map((book) => book.get({ plain: true }));
-
-    console.log(books);
 
     res.status(200).render('booklist', {
       books,
       loggedIn: req.session.loggedIn,
     });
+    // res.status(200).json({
+    //   books,
+    //   loggedIn: req.session.loggedIn,
+    // });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -47,6 +49,7 @@ exports.getOneBook = async (req, res) => {
       book,
       loggedIn: req.session.loggedIn,
     });
+    // res.status(200).json({ book, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -71,7 +74,6 @@ exports.showSignupPage = (req, res) => {
   }
 };
 
-
 exports.searchBooks = async (req, res) => {
   const { search } = req.query;
   //route takes search string, and looks for books with the same name
@@ -84,7 +86,7 @@ exports.searchBooks = async (req, res) => {
       },
     });
 
-    if(!data) {
+    if (!data) {
       res.status(404).json({ message: 'No books found with this title' });
       return;
     }
@@ -102,22 +104,27 @@ exports.searchBooks = async (req, res) => {
 
 exports.postReview = async (req, res) => {
   try {
-    const { book_id, review_text, review_rating } = req.body;
+    const { book_id, review_text } = req.body;
 
     if (!book_id) {
       throw new Error('Invalid book ID');
     }
 
     const newReview = await Review.create({
-      user_id: 1, // Change to req.session.user_id when login is working
+      user_id: req.session.user.id,
       review_text,
       book_id,
-      review_rating,
     });
 
-    res.status(200).redirect('back');
+    res.status(200).json({
+      status: 'success',
+      review: newReview,
+    });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({
+      status: 'fail',
+      message: err.message,
+    });
   }
 };
