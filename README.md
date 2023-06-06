@@ -31,5 +31,8 @@ LINK
 
 SCREENSHOT 
 
+USAGE
+Visit: https://betterreads-bookreviewapp.herokuapp.com/ 
+
 APIS
 Google Book's API: https://developers.google.com/books
