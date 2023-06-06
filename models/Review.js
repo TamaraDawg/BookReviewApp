@@ -19,15 +19,6 @@ Review.init(
                 len: [1, 1000]
             }
         },
-        review_rating: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            validate: {
-                isNumeric: true,
-                min: 1,
-                max: 5
-            }
-        },
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

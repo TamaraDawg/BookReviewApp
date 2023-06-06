@@ -114,8 +114,7 @@ exports.postReview = async (req, res) => {
     const newReview = await Review.create({
       user_id: req.session.user.id,
       review_text,
-      book_id,
-      review_rating,
+      book_id
     });
 
     res.status(200).redirect('back');
