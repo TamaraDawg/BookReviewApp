@@ -9,8 +9,6 @@ exports.getAllBooks = async (req, res) => {
 
     const books = data.map((book) => book.get({ plain: true }));
 
-    console.log(books);
-
     res.status(200).render('booklist', {
       books,
       loggedIn: req.session.loggedIn,
@@ -106,14 +104,15 @@ exports.searchBooks = async (req, res) => {
 
 exports.postReview = async (req, res) => {
   try {
-    const { book_id, review_text, review_rating } = req.body;
+    const { book_id, review_text, review_rating, user_id } = req.body;
 
     if (!book_id) {
       throw new Error('Invalid book ID');
     }
 
+
     const newReview = await Review.create({
-      user_id: 1, // Change to req.session.user_id when login is working
+      user_id: req.session.user.id,
       review_text,
       book_id,
       review_rating,
